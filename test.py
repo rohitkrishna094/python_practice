@@ -1,2 +1,1 @@
-name = input("Enter your name: ")
-print(name)
+(999).bit_length();
