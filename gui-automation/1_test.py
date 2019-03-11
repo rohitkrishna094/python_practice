@@ -22,11 +22,11 @@ print(size)
 #     pg.moveTo(100, 200, duration=0.25)
 
 # moveRel works with relative coordinates
-# for i in range(10):
-#     pg.moveRel(100, 0, duration=0.25)
-#     pg.moveRel(0, 100, duration=0.25)
-#     pg.moveRel(-100, 0, duration=0.25)
-#     pg.moveRel(0, -100, duration=0.25)
+for i in range(10):
+    pg.moveRel(100, 0, duration=0.25)
+    pg.moveRel(0, 100, duration=0.25)
+    pg.moveRel(-100, 0, duration=0.25)
+    pg.moveRel(0, -100, duration=0.25)
 
 # get mouse position
 # try:
