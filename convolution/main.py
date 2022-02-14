@@ -4,10 +4,6 @@ import cv2
 from skimage.exposure import rescale_intensity
 
 
-def convolveSingle(kernel, arr):
-    return np.sum(kernel * arr)
-
-
 def convolve_mine(img, kernel):
     output = np.empty((img.shape[0] - (kernel.shape[0]-1), img.shape[1] - (kernel.shape[0]-1)), np.uint8)
     convRows = output.shape[0]
@@ -15,7 +11,7 @@ def convolve_mine(img, kernel):
 
     for y in range(convCols):
         for x in range(convRows):
-            output[x, y] = convolveSingle(kernel, img[x: x + kernel.shape[0], y: y + kernel.shape[1]])
+            output[x, y] = np.sum(kernel * img[x: x + kernel.shape[0], y: y + kernel.shape[1]])
     return output
 
 
@@ -36,8 +32,9 @@ def convolve(image, kernel):
 
             output[y - pad, x - pad] = k
 
-    output = rescale_intensity(output, in_range=(0, 255))
-    output = (output * 255).astype("uint8")
+    scale = 255
+    output = rescale_intensity(output, in_range=(0, scale))
+    output = (output * scale).astype("uint8")
 
     return output
 
@@ -104,7 +101,7 @@ unsharpMaskingKernel = (-1 / 256) * np.array([
     [1, 4, 6, 4, 1]
 ])
 
-
+convolve = convolve_mine
 listOfOutputs = {
     'identity': convolve(img, identityKernel),
     'edgeKernel1': convolve(img, edgeKernel1),
